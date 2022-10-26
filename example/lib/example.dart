@@ -70,9 +70,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   onPressed: () async {
                     api.setToken(
                         "eyJhbGciOiJBMTI4S1ciLCJlbmMiOiJBMTI4Q0JDLUhTMjU2IiwidHlwIjoiSldUIn0.lJwZwM0BENmsWWoigXJaR_rFPsNqA3dhAuf-Zhkv-aB4QG5EOl4c5Q.7DP00lZ8lh5QbGDWGSqnvA.Vxfo-wbd5uiRah7UqrwX3fkQ5yN-xr2Brt8Lvm70-gZW44aEhFubXXV8-C1txaJZslvGlzCT8qfn5jUMXASJV1CRs8l2HY3yMaP6tlbQ9XTgvC8pxmOaes-emMT-EeG9NYwmD4nIE7cNobtAQ_N8VDPFvQsS-rwy7R26HJCNqBqZO01MokKdqTJQV4Gin-SRqyOjwtT2Ml93rDRA9lUUvi0XnU5nhw-7lyh1CIIGYvkVCV8YePuijJ3zXQq6AeTTm2gRo1brtkKxozC0O-f3I9SA9ll_j2-yixTT5-khQvROzdyyLOfHMTz-bwfYfIiia-M03VW4UEIhSO50Z4bIpuRBqWmNIRUCQG8SO5aV9wnpSAhnWJ5uMcJFH2WYMZpoTrud0ItrYOYsQoQSQSstU-dHlPOKcYna-ZB-Rqf7BUwvdmLXXtxEc1AOuK3D2YaLlV2PczH1qN1W8lZ7L47GBPwmpW5z4XccntYhp66qW4L5IuaLYdyb0SxZgL46NvcC4V_Ho6pep0iTMarQonHds-bfBvUrhByv_wbqnRqr_hvDfHNat-aeYyp45nwhYNQDriBdIBEE56kJJAb7uNb9JgCt0_sejEnHMpZfMYjccC3FJ4UVTJ21I1LVMmgP2Md0eM5_0YslZO8vpIxnHERuNGXm0dvksRCx7-ZyJ7mjG6AZO8_ZHm9tyvYNXL8_0aIA7v2Z2etU7oCnaUFcuKvenuE27DVQMpbnKBwXFfoRxtTNgpxQxyubylFtsbBZwWEu0u6bvuaaVA_j7TYZ8VPriTAHHxJe4W5a6Aib26qpw1X9yHbIU8u3UU-S0PoRtaO3HV9pOK0V3NjHOYxMxSES_Hy1Bd-Y99HcVjGDyiw0cy3jf3LJ_osinfrJA7Ma13T7AdaXlY2fszI2sDRBg7hDKSnsINiDAg7iiOfc2Opm4luHFFh6d0zySoAvSPO1Lw-p.f0y9VQfuLHRakStQrihaNw");
-                    ResponseModel res = await api.get(
-                      "https://appgaraj.dinavision.org/api/v1/Business/GetBusinessByToken",
-                      queries: [
+                    ResponseModel res =
+                    await api.get("",queries: [
                         QueryModel(name: "mobile", value: "09199118259")
                       ],
                       headerEnum: HeaderEnum.bearerHeaderEnum,
