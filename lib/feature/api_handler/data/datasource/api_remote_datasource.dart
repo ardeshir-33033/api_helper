@@ -78,20 +78,20 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         await networkInfo.isConnected.then((value) {
           if (value) {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           } else {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           }
         });
       }
-      if (responseModel.result == ResultEnum.success) {
+      if (responseModel.result == ResultEnum.SUCCESS) {
         return responseModel;
       }
       i++;
@@ -122,20 +122,20 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         await networkInfo.isConnected.then((value) {
           if (value) {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           } else {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           }
         });
       }
-      if (responseModel.result == ResultEnum.success) {
+      if (responseModel.result == ResultEnum.SUCCESS) {
         return responseModel;
       }
       i++;
@@ -172,20 +172,20 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         await networkInfo.isConnected.then((value) {
           if (value) {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           } else {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           }
         });
       }
-      if (responseModel.result == ResultEnum.success) {
+      if (responseModel.result == ResultEnum.SUCCESS) {
         return responseModel;
       }
       i++;
@@ -222,20 +222,20 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         await networkInfo.isConnected.then((value) {
           if (value) {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           } else {
             responseModel = ResponseModel(
-                result: ResultEnum.error,
+                result: ResultEnum.ERROR,
                 statusCode: 545,
                 data: null,
                 message: [""]);
           }
         });
       }
-      if (responseModel.result == ResultEnum.success) {
+      if (responseModel.result == ResultEnum.SUCCESS) {
         return responseModel;
       }
       i++;

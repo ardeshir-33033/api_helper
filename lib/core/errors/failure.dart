@@ -5,7 +5,9 @@ abstract class Failure<ResponseModel, String> {
   // call(ResponseModel response, String path);
 
   printError(String text) {
-    debugPrint('\x1B[31m$text\x1B[0m');
+    // print('\x1B[33m$text\x1B[0m');
+
+    debugPrint('\x1B[33m$text\x1B[0m');
   }
 }
 

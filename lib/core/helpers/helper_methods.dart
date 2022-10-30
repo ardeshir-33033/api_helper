@@ -72,15 +72,16 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
     try {
       switch (typeEnum) {
         case ResponseEnum.responseModelEnum:
-          String data = utf8.decode(response.data.bodyBytes);
+          // String data = utf8.decode(response.data.bodyBytes);
           ResponseModel result = ResponseModel().fromJson(
-            json.decode(data),
+            // json.decode(response.data),
+            response.data,
           );
           if (result.statusCode != 200) {
             ApiFailure(
                 ResponseModel(
                   statusCode: result.statusCode,
-                  result: ResultEnum.error,
+                  result: ResultEnum.ERROR,
                   data: result.data,
                   message: result.message,
                 ),
@@ -98,7 +99,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           response.realUri.path);
 
       return ResponseModel(
-          result: ResultEnum.error,
+          result: ResultEnum.ERROR,
           statusCode: response.statusCode ?? 555,
           data: null,
           message: [""]);

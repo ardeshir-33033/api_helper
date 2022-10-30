@@ -25,11 +25,12 @@ class APIHandler {
   /// sets Token to use bearer header in APIs.
   setToken(String? rToken) {
     Token token = Token();
+
     token.setToken = rToken;
   }
 
   /// get Token if exists
-  String? get token => Token().token;
+  // String? get token => Token().token;
 
   /// calls a 'Get' API and returns a `ResponseModel`.
   Future<ResponseModel> get(
