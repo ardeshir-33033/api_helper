@@ -156,7 +156,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
-            .delete(
+            .post(
             ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
             data: body,
             options: Options(
@@ -206,7 +206,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
-            .delete(
+            .put(
             ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
             data: body,
             options: Options(
