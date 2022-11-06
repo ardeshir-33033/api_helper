@@ -1,3 +1,4 @@
+import 'package:api_handler/core/consts/user_agent.dart';
 import 'package:api_handler/feature/api_handler/domain/usecases/get_api_usecase.dart';
 import '../../../core/models/api_data/api_data.dart';
 import '../../../core/token/token.dart';
@@ -27,6 +28,12 @@ class APIHandler {
     Token token = Token();
 
     token.setToken = rToken;
+  }
+
+  setUserAgent(String agent) {
+    UserAgent userAgent = UserAgent();
+
+    userAgent.setAgent = agent;
   }
 
   /// get Token if exists
