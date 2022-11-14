@@ -65,7 +65,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
   }
 
   responseGetter<T>(ResponseEnum typeEnum, Response response) {
-    if (response.statusCode != 200 || response.statusCode != 201) {
+    if (response.statusCode != 200 && response.statusCode != 201) {
       ApiFailure(ResponseModel(statusCode: response.statusCode ?? 555),
           response.realUri.path);
     }
@@ -77,7 +77,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
             // json.decode(response.data),
             response.data,
           );
-          if (result.statusCode != 200 || response.statusCode != 201) {
+          if (result.statusCode != 200 && response.statusCode != 201) {
             ApiFailure(
                 ResponseModel(
                   statusCode: result.statusCode,
