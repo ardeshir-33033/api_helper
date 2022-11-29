@@ -14,10 +14,10 @@ abstract class Failure<ResponseModel, String> {
 // General failures
 class ApiFailure extends Failure<ResponseModel, String> {
   // @override
-  ApiFailure(response, path) {
+  ApiFailure(ResponseModel response, path) {
     printError('Url: $path');
     printError('StatusCode: ${response.statusCode}');
-    printError('IsStatus: ${response.isSuccess}');
+    printError('IsStatus: ${response.result}');
     printError('Data: ${response.data.toString()}');
     printError('Message: ${response.message}');
   }
