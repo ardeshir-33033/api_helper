@@ -173,15 +173,15 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
+                statusCode: 510,
                 data: null,
-                message: [""]);
+                message: ["Error Occurred"]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
+                statusCode: 555,
                 data: null,
-                message: [""]);
+                message: ["No Internet Connection"]);
           }
         });
       }

@@ -11,7 +11,7 @@ class NetworkInfoImpl implements NetworkInfo {
   Future<bool> _checkStatus() async {
     bool isOnline = false;
     try {
-      final result = await InternetAddress.lookup('https://google.com');
+      final result = await InternetAddress.lookup('www.google.com');
       if (result.isNotEmpty && result[0].rawAddress.isNotEmpty) {
         isOnline = true;
       } else {
