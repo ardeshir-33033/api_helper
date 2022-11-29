@@ -9,7 +9,7 @@ import '../enums/response_enum.dart';
 import '../models/query_model.dart';
 
 abstract class ApiRemoteDataSource {
-  static int _tries = 2;
+  static int _tries = 1;
   static int _timeout = 20;
 
   Future<ResponseModel> httpGet(
