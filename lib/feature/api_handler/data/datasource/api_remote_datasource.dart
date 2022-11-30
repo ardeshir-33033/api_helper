@@ -72,14 +72,20 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(ResponseModel(message: [e.toString()]), url);
+        ApiFailure(
+            ResponseModel(
+                data: (e as DioError).response?.data,
+                statusCode: (e).response?.statusCode ?? 555,
+                result: ResultEnum.ERROR,
+                message: e.response?.data['messages']),
+            url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: (e as DioError).response?.statusCode ?? 510,
+                statusCode: (e).response?.statusCode ?? 510,
                 data: e.response?.data ?? "",
                 message: [e.error]);
           } else {
@@ -100,23 +106,32 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
   }
 
   @override
-  Future<ResponseModel> httpGet(String url, List<QueryModel>? query,
-      String? pathVariable, HeaderEnum headerEnum, ResponseEnum responseEnum) async {
+  Future<ResponseModel> httpGet(
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum) async {
     int i = 0;
     ResponseModel responseModel = ResponseModel();
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
-            .get(
-            ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
-            options: Options(
-              headers: ApiHelperMethodsImpl().headerGetter(headerEnum),
-            ))
+            .get(ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
+                options: Options(
+                  headers: ApiHelperMethodsImpl().headerGetter(headerEnum),
+                ))
             .timeout(Duration(seconds: ApiRemoteDataSource._timeout));
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(ResponseModel(message: [e.toString()]), url);
+        ApiFailure(
+            ResponseModel(
+                data: (e as DioError).response?.data,
+                statusCode: (e).response?.statusCode ?? 555,
+                result: ResultEnum.ERROR,
+                message: [e.toString()]),
+            url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
@@ -156,25 +171,28 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
-            .post(
-            ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
-            data: body,
-            options: Options(
-              headers: ApiHelperMethodsImpl().headerGetter(headerEnum),
-            ))
+            .post(ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
+                data: body,
+                options: Options(
+                  headers: ApiHelperMethodsImpl().headerGetter(headerEnum),
+                ))
             .timeout(Duration(seconds: ApiRemoteDataSource._timeout));
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(ResponseModel(message: [e.toString()]), url);
-
+        ApiFailure(
+            ResponseModel(
+                data: (e as DioError).response?.data,
+                statusCode: (e).response?.statusCode ?? 555,
+                result: ResultEnum.ERROR,
+                message: [e.toString()]),
+            url);
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
-
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: (e as DioError).response?.statusCode ?? 510,
+                statusCode: (e).response?.statusCode ?? 510,
                 data: e.response?.data ?? "",
                 message: [e.error]);
           } else {
@@ -207,26 +225,31 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
-            .put(
-            ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
-            data: body,
-            options: Options(
-              headers: ApiHelperMethodsImpl().headerGetter(headerEnum),
-            ))
+            .put(ApiHelperMethodsImpl().urlGenerator(url, query, pathVariable),
+                data: body,
+                options: Options(
+                  headers: ApiHelperMethodsImpl().headerGetter(headerEnum),
+                ))
             .timeout(Duration(seconds: ApiRemoteDataSource._timeout));
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(ResponseModel(message: [e.toString()]), url);
+        ApiFailure(
+            ResponseModel(
+                data: (e as DioError).response?.data,
+                statusCode: (e).response?.statusCode ?? 555,
+                result: ResultEnum.ERROR,
+                message: [e.toString()]),
+            url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: (e as DioError).response?.statusCode ?? 510,
+                statusCode: (e).response?.statusCode ?? 510,
                 data: e.response?.data ?? "",
-                message: [e.error]);
+                message: [e.response?.data.messages]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
