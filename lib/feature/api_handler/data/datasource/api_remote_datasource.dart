@@ -79,15 +79,15 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
-                data: null,
-                message: [""]);
+                statusCode: (e as DioError).response?.statusCode ?? 510,
+                data: e.response?.data ?? "",
+                message: [e.error]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
+                statusCode: 555,
                 data: null,
-                message: [""]);
+                message: ["No Internet Connection"]);
           }
         });
       }
@@ -123,15 +123,15 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
-                data: null,
-                message: [""]);
+                statusCode: (e as DioError).response?.statusCode ?? 510,
+                data: e.response?.data ?? "",
+                message: [e.error]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
+                statusCode: 555,
                 data: null,
-                message: [""]);
+                message: ["No Internet Connection"]);
           }
         });
       }
@@ -170,12 +170,13 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
+
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 510,
-                data: null,
-                message: ["Error Occurred"]);
+                statusCode: (e as DioError).response?.statusCode ?? 510,
+                data: e.response?.data ?? "",
+                message: [e.error]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
@@ -223,15 +224,15 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
           if (value) {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
-                data: null,
-                message: [""]);
+                statusCode: (e as DioError).response?.statusCode ?? 510,
+                data: e.response?.data ?? "",
+                message: [e.error]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
-                statusCode: 545,
+                statusCode: 555,
                 data: null,
-                message: [""]);
+                message: ["No Internet Connection"]);
           }
         });
       }
