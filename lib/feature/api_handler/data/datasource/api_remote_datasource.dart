@@ -86,8 +86,8 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
                 statusCode: (e).response?.statusCode ?? 510,
-                data: e.response?.data ?? "",
-                message: [e.error]);
+                data: e.error,
+                message: [e.response?.data ?? ""]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
@@ -139,8 +139,8 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
                 statusCode: (e as DioError).response?.statusCode ?? 510,
-                data: e.response?.data ?? "",
-                message: [e.error]);
+                data: e.error,
+                message: [e.response?.data ?? ""]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
@@ -193,8 +193,8 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
                 statusCode: (e).response?.statusCode ?? 510,
-                data: e.response?.data ?? "",
-                message: [e.error]);
+                data: e.error,
+                message: [e.response?.data ?? ""]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
@@ -248,8 +248,8 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
                 statusCode: (e).response?.statusCode ?? 510,
-                data: e.response?.data ?? "",
-                message: [e.response?.data.messages]);
+                data: e.error,
+                message: [e.response?.data ?? ""]);
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.ERROR,
