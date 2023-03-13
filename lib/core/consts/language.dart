@@ -2,7 +2,7 @@ class Language {
   static String? _language;
 
 
-  set setAgent(String language){
+  set setLanguage(String language){
     _language = language;
   }
 

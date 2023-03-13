@@ -1,3 +1,4 @@
+import 'package:api_handler/core/consts/language.dart';
 import 'package:api_handler/core/consts/user_agent.dart';
 import 'package:api_handler/feature/api_handler/domain/usecases/get_api_usecase.dart';
 import '../../../core/models/api_data/api_data.dart';
@@ -34,6 +35,12 @@ class APIHandler {
     UserAgent userAgent = UserAgent();
 
     userAgent.setAgent = agent;
+  }
+
+  setLanguage(String lang) {
+    Language language = Language();
+
+    language.setLanguage = lang;
   }
 
   /// get Token if exists
