@@ -60,7 +60,7 @@ class _PageState extends State<Page> {
       responseEnum: ResponseEnum.responseModelEnum,
     );
 
-    if (response.result == ResultEnum.SUCCESS) {
+    if (response.result == ResultEnum.success) {
       print(response);
     }
 

@@ -78,7 +78,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       responseEnum: ResponseEnum.responseModelEnum,
                     );
 
-                    if (res.result == ResultEnum.SUCCESS) {
+                    if (res.result == ResultEnum.success) {
                       print(res);
                     }
                   },
@@ -109,7 +109,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       responseEnum: ResponseEnum.responseModelEnum,
                     );
 
-                    if (res.result == ResultEnum.SUCCESS) {
+                    if (res.result == ResultEnum.success) {
                       print(res);
                     }
                   },

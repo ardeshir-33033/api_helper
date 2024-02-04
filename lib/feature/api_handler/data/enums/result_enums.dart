@@ -1,4 +1,4 @@
 enum ResultEnum {
-  SUCCESS,
-  ERROR,
+  success,
+  error,
 }

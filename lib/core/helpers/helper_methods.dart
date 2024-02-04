@@ -81,7 +81,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
             ApiFailure(
                 ResponseModel(
                   statusCode: result.statusCode,
-                  result: ResultEnum.ERROR,
+                  result: ResultEnum.error,
                   data: result.data,
                   message: result.message,
                 ),
@@ -94,14 +94,14 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
     } catch (e) {
       ApiFailure(
           ResponseModel(
-              statusCode: response.statusCode ?? 555, message: [e.toString()]),
+              statusCode: response.statusCode ?? 555, message: e.toString()),
           response.realUri.path);
 
       return ResponseModel(
-          result: ResultEnum.ERROR,
+          result: ResultEnum.error,
           statusCode: response.statusCode ?? 555,
           data: null,
-          message: [""]);
+          message: "");
     }
   }
 }
