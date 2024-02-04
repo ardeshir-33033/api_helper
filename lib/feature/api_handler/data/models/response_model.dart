@@ -14,7 +14,6 @@ class ResponseModel {
   });
 
   ResponseModel fromJson(dynamic json) {
-    statusCode = json["status_code"];
     data = json["data"];
     // result = json["result"];
     message = json["messages"] ?? [];
