@@ -17,7 +17,7 @@ class ResponseModel {
     data = json["data"];
     // result = json["result"];
     message = json["messages"] ?? "";
-    result = ResultEnum.values.byName(json["result"] ?? "error");
+    result = ResultEnum.values.byName(json["status"] ?? "error");
     // String val = json['result'];
     // return CounterState(
     //   value: map['value'],
