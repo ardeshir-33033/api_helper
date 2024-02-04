@@ -16,7 +16,7 @@ class ResponseModel {
   ResponseModel fromJson(dynamic json) {
     data = json["data"];
     // result = json["result"];
-    message = json["messages"] ?? [];
+    message = json["messages"] ?? "";
     result = ResultEnum.values.byName(json["result"] ?? "error");
     // String val = json['result'];
     // return CounterState(
