@@ -1,13 +1,13 @@
 import 'package:api_handler/feature/api_handler/data/enums/result_enums.dart';
 
 class ResponseModel {
-  int statusCode;
+  int? statusCode;
   ResultEnum result;
   String? message;
   dynamic data;
 
   ResponseModel({
-    this.statusCode = 555,
+    this.statusCode,
     this.result = ResultEnum.error,
     this.message,
     this.data,

@@ -80,7 +80,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           if (result.statusCode != 200 && response.statusCode != 201) {
             ApiFailure(
                 ResponseModel(
-                  statusCode: result.statusCode,
+                  statusCode: response.statusCode,
                   result: ResultEnum.error,
                   data: result.data,
                   message: result.message,
