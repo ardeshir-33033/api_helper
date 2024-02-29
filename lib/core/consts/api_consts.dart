@@ -7,7 +7,7 @@ import 'language.dart';
 
 class ApiConstants {
   Map<String, String> imageHeader = {
-    HttpHeaders.authorizationHeader: " ${Token().token ?? ""}",
+    HttpHeaders.authorizationHeader: "Bearer ${Token().token ?? ""}",
     "User-Agent": UserAgent().userAgent ?? '',
     "Content-Language" : Language().language ?? 'en',
     // "Accept": "multipart/byteranges",
@@ -15,7 +15,7 @@ class ApiConstants {
   };
 
   Map<String, String> bearerHeader = {
-    HttpHeaders.authorizationHeader: " ${Token().token ?? ""}",
+    HttpHeaders.authorizationHeader: "Bearer ${Token().token ?? ""}",
     "User-Agent": UserAgent().userAgent ?? '',
     "Content-Language" : Language().language ?? 'en',
 
