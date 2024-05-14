@@ -99,6 +99,34 @@ class PutApiData implements ApiData {
   });
 }
 
+class PatchApiData implements ApiData {
+  @override
+  late String url;
+
+  @override
+  HeaderEnum headerEnum;
+
+  @override
+  String? pathVars;
+
+  @override
+  List<QueryModel>? queries;
+
+  @override
+  ResponseEnum responseEnum;
+
+  dynamic body;
+
+  PatchApiData(
+    this.url, {
+    this.body,
+    required this.headerEnum,
+    this.pathVars,
+    this.queries,
+    required this.responseEnum,
+  });
+}
+
 class DeleteApiData implements ApiData {
   @override
   late String url;
