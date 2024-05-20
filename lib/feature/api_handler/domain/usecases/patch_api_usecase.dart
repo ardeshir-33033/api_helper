@@ -10,7 +10,7 @@ class PatchApi implements UseCase<PatchApiData> {
   Future<ResponseModel> call(PatchApiData apiData) async {
     ApiRemoteDataSourceImpl remoteDataSourceImpl = ApiRemoteDataSourceImpl();
 
-    ResponseModel response = await remoteDataSourceImpl.httpPut(
+    ResponseModel response = await remoteDataSourceImpl.httpPatch(
       apiData.url,
       apiData.queries,
       apiData.pathVars,
