@@ -1,9 +1,9 @@
 import 'package:api_handler/feature/api_handler/data/enums/result_enums.dart';
 import 'package:api_handler/feature/api_handler/data/models/links_model.dart';
 
-class ResponseModel {
+class ResponseModel<T> {
   String? message;
-  dynamic data;
+  T? data;
   int? count;
   int? totalPages;
   LinksModel? links;
