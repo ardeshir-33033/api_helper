@@ -63,7 +63,7 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
-    if (_onTokenExpired != null && responseModel.statusCode == 401) {
+    if (_onTokenExpired != null) {
       _onTokenExpired!();
     }
     return responseModel;
@@ -86,7 +86,7 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
-    if (_onTokenExpired != null && responseModel.statusCode == 401) {
+    if (_onTokenExpired != null) {
       _onTokenExpired!();
     }
     return responseModel;
@@ -109,7 +109,7 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
-    if (_onTokenExpired != null && responseModel.statusCode == 401) {
+    if (_onTokenExpired != null) {
       _onTokenExpired!();
     }
     return responseModel;
@@ -132,7 +132,7 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
-    if (_onTokenExpired != null && responseModel.statusCode == 401) {
+    if (_onTokenExpired != null) {
       _onTokenExpired!();
     }
     return responseModel;
@@ -155,7 +155,7 @@ class APIHandler {
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
-    if (_onTokenExpired != null && responseModel.statusCode == 401) {
+    if (_onTokenExpired != null) {
       _onTokenExpired!();
     }
     return responseModel;

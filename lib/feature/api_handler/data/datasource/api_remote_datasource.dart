@@ -84,8 +84,6 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         ApiFailure(
             ResponseModel(
                 data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
                 message: e.response?.data['messages']),
             url);
 
