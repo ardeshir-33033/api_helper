@@ -25,7 +25,7 @@ class ResponseModel<T> {
     message = json['messages'] ?? "";
     links = links != null ? LinksModel().fromJson(json['links']) : null;
     count = json['count'];
-    totalPages = json['totalPages'];
+    totalPages = json['total_pages'];
     return this;
   }
 }
