@@ -134,13 +134,12 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(
-            ResponseModel(
-                data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
-                message: e.toString()),
-            url);
+        final res = ResponseModel(
+            data: (e as DioError).response?.data,
+            statusCode: (e).response?.statusCode ?? 555,
+            result: ResultEnum.error,
+            message: e.toString());
+        ApiFailure(res, url);
 
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
@@ -158,6 +157,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
                 message: "No Internet Connection");
           }
         });
+        return res;
       }
       if (responseModel.result == ResultEnum.success) {
         return responseModel;
