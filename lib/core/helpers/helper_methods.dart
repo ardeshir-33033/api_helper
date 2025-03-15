@@ -78,14 +78,14 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           // response.data,
           // );
           if (response.statusCode != 200) {
-            ApiFailure(
-                ResponseModel(
-                  statusCode: response.statusCode,
-                  result: ResultEnum.error,
-                  data: response.data,
-                  message: response.statusMessage,
-                ),
-                response.realUri.path);
+            final responseModel = ResponseModel(
+              statusCode: response.statusCode,
+              result: ResultEnum.error,
+              data: response.data,
+              message: response.statusMessage,
+            );
+            ApiFailure(responseModel, response.realUri.path);
+            return responseModel;
           }
           return ResponseModel(
             statusCode: response.statusCode,
