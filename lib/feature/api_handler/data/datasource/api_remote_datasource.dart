@@ -144,11 +144,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         NetworkInfoImpl networkInfo = NetworkInfoImpl();
         await networkInfo.isConnected.then((value) {
           if (value) {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: (e).response?.statusCode ?? 510,
-                data: e.error,
-                message: e.response?.data ?? "");
+            responseModel = res;
           } else {
             responseModel = ResponseModel(
                 result: ResultEnum.error,
