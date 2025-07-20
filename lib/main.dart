@@ -1,5 +1,6 @@
 import 'package:api_handler/core/token/token.dart';
 import 'package:api_handler/feature/api_handler/presentation/presentation_usecase.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -53,16 +54,16 @@ class _PageState extends State<Page> {
     return Container();
   }
 
-  Future<ResponseModel> mine() async {
-    ResponseModel response = await api.get(
+  Future<Response> mine() async {
+    Response response = await api.get(
       "https://stg.mydoci.app/api/v1/package/mine",
       headerEnum: HeaderEnum.bearerHeaderEnum,
       responseEnum: ResponseEnum.responseModelEnum,
     );
 
-    if (response.result == ResultEnum.success) {
-      print(response);
-    }
+    // if (response.result == ResultEnum.success) {
+    //   print(response);
+    // }
 
     return response;
   }

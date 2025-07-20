@@ -66,42 +66,45 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
 
   responseGetter<T>(ResponseEnum typeEnum, Response response) {
     if (response.statusCode != 200 && response.statusCode != 201) {
-      ApiFailure(ResponseModel(statusCode: response.statusCode ?? 555),
-          response.realUri.path);
+      return response;
+      // ApiFailure(ResponseModel(statusCode: response.statusCode ?? 555),
+      //     response.realUri.path);
     }
     try {
       switch (typeEnum) {
         case ResponseEnum.responseModelEnum:
           // String data = utf8.decode(response.data.bodyBytes);
-          ResponseModel result = ResponseModel().fromJson(
+          // ResponseModel result = ResponseModel().fromJson(
             // json.decode(response.data),
-            response.data,
-          );
-          if (result.statusCode != 200 && response.statusCode != 201) {
-            ApiFailure(
-                ResponseModel(
-                  statusCode: response.statusCode,
-                  result: ResultEnum.error,
-                  data: result.data,
-                  message: result.message,
-                ),
-                response.realUri.path);
-          }
-          return result;
+            // response.data,
+          // );
+        return response;
+          // if (result.statusCode != 200 && response.statusCode != 201) {
+          //   ApiFailure(
+          //       ResponseModel(
+          //         statusCode: response.statusCode,
+          //         result: ResultEnum.error,
+          //         data: result.data,
+          //         message: result.message,
+          //       ),
+          //       response.realUri.path);
+          // }
+          // return result;
         default:
           return response.data.bodyBytes;
       }
     } catch (e) {
-      ApiFailure(
-          ResponseModel(
-              statusCode: response.statusCode ?? 555, message: e.toString()),
-          response.realUri.path);
-
-      return ResponseModel(
-          result: ResultEnum.error,
-          statusCode: response.statusCode ?? 555,
-          data: null,
-          message: "");
+      return response;
+      // ApiFailure(
+      //     ResponseModel(
+      //         statusCode: response.statusCode ?? 555, message: e.toString()),
+      //     response.realUri.path);
+      //
+      // return ResponseModel(
+      //     result: ResultEnum.error,
+      //     statusCode: response.statusCode ?? 555,
+      //     data: null,
+      //     message: "");
     }
   }
 }

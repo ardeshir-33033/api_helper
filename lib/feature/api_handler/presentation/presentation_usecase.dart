@@ -2,6 +2,7 @@ import 'package:api_handler/core/consts/language.dart';
 import 'package:api_handler/core/consts/user_agent.dart';
 import 'package:api_handler/feature/api_handler/domain/usecases/get_api_usecase.dart';
 import 'package:api_handler/feature/api_handler/domain/usecases/patch_api_usecase.dart';
+import 'package:dio/dio.dart';
 import '../../../core/models/api_data/api_data.dart';
 import '../../../core/token/token.dart';
 import '../data/enums/header_enum.dart';
@@ -49,14 +50,14 @@ class APIHandler {
   // String? get token => Token().token;
 
   /// calls a 'Get' API and returns a `ResponseModel`.
-  Future<ResponseModel> get(
+  Future<Response> get(
     String url, {
     List<QueryModel>? queries,
     String? pathVariable,
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    ResponseModel responseModel = await _getApi(GetApiData(
+    Response responseModel = await _getApi(GetApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -70,7 +71,7 @@ class APIHandler {
   }
 
   /// calls a 'Post' API and returns a `ResponseModel`.
-  Future<ResponseModel> post(
+  Future<Response> post(
     String url, {
     List<QueryModel>? queries,
     String? pathVariable,
@@ -78,7 +79,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    ResponseModel responseModel = await _postApi(PostApiData(
+    Response responseModel = await _postApi(PostApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -93,7 +94,7 @@ class APIHandler {
   }
 
   /// calls a 'put' API and returns a `ResponseModel`.
-  Future<ResponseModel> put(
+  Future<Response> put(
     String url, {
     List<QueryModel>? queries,
     String? pathVariable,
@@ -101,7 +102,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    ResponseModel responseModel = await _putApi(PutApiData(
+    Response responseModel = await _putApi(PutApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -116,7 +117,7 @@ class APIHandler {
   }
 
   /// calls a 'patch' API and returns a `ResponseModel`.
-  Future<ResponseModel> patch(
+  Future<Response> patch(
     String url, {
     List<QueryModel>? queries,
     String? pathVariable,
@@ -124,7 +125,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    ResponseModel responseModel = await _patchApi(PatchApiData(
+    Response responseModel = await _patchApi(PatchApiData(
       url,
       queries: queries,
       pathVars: pathVariable,
@@ -139,7 +140,7 @@ class APIHandler {
   }
 
   /// calls a 'delete' API and returns a `ResponseModel`.
-  Future<ResponseModel> delete(
+  Future<Response> delete(
     String url, {
     List<QueryModel>? queries,
     String? pathVariable,
@@ -147,7 +148,7 @@ class APIHandler {
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
-    ResponseModel responseModel = await _deleteApi(DeleteApiData(
+    Response responseModel = await _deleteApi(DeleteApiData(
       url,
       queries: queries,
       pathVars: pathVariable,

@@ -12,7 +12,7 @@ abstract class ApiRemoteDataSource {
   static int _tries = 1;
   static int _timeout = 20;
 
-  Future<ResponseModel> httpGet(
+  Future<Response> httpGet(
     String url,
     List<QueryModel> query,
     String? pathVariable,
@@ -20,16 +20,7 @@ abstract class ApiRemoteDataSource {
     ResponseEnum responseEnum,
   );
 
-  Future<ResponseModel> httpPost(
-    String url,
-    List<QueryModel> query,
-    String? pathVariable,
-    var body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-  );
-
-  Future<ResponseModel> httpPut(
+  Future<Response> httpPost(
     String url,
     List<QueryModel> query,
     String? pathVariable,
@@ -38,7 +29,7 @@ abstract class ApiRemoteDataSource {
     ResponseEnum responseEnum,
   );
 
-  Future<ResponseModel> httpPatch(
+  Future<Response> httpPut(
     String url,
     List<QueryModel> query,
     String? pathVariable,
@@ -47,7 +38,16 @@ abstract class ApiRemoteDataSource {
     ResponseEnum responseEnum,
   );
 
-  Future<ResponseModel> httpDelete(
+  Future<Response> httpPatch(
+    String url,
+    List<QueryModel> query,
+    String? pathVariable,
+    var body,
+    HeaderEnum headerEnum,
+    ResponseEnum responseEnum,
+  );
+
+  Future<Response> httpDelete(
     String url,
     List<QueryModel> query,
     String? pathVariable,
@@ -59,7 +59,7 @@ abstract class ApiRemoteDataSource {
 
 class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
   @override
-  Future<ResponseModel> httpDelete(
+  Future<Response> httpDelete(
       String url,
       List<QueryModel>? query,
       String? pathVariable,
@@ -67,7 +67,8 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       HeaderEnum headerEnum,
       ResponseEnum responseEnum) async {
     int i = 0;
-    ResponseModel responseModel = ResponseModel();
+    Response? responseModel;
+    // ResponseModel responseModel = ResponseModel();
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
@@ -81,48 +82,50 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(
-            ResponseModel(
-                data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
-                message: e.response?.data['messages']),
-            url);
-
-        NetworkInfoImpl networkInfo = NetworkInfoImpl();
-        await networkInfo.isConnected.then((value) {
-          if (value) {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: (e).response?.statusCode ?? 510,
-                data: e.error,
-                message: e.response?.data ?? "");
-          } else {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: 555,
-                data: null,
-                message: "No Internet Connection");
-          }
-        });
+        throw Exception(e.toString());
+// responseModel = Response(requestOptions: requestOptions);
+//         ApiFailure(
+//             ResponseModel(
+//                 data: (e as DioError).response?.data,
+//                 statusCode: (e).response?.statusCode ?? 555,
+//                 result: ResultEnum.error,
+//                 message: e.response?.data['messages']),
+//             url);
+//
+//         NetworkInfoImpl networkInfo = NetworkInfoImpl();
+//         await networkInfo.isConnected.then((value) {
+//           if (value) {
+//             responseModel = ResponseModel(
+//                 result: ResultEnum.error,
+//                 statusCode: (e).response?.statusCode ?? 510,
+//                 data: e.error,
+//                 message: e.response?.data ?? "");
+//           } else {
+//             responseModel = ResponseModel(
+//                 result: ResultEnum.error,
+//                 statusCode: 555,
+//                 data: null,
+//                 message: "No Internet Connection");
+//           }
+//         });
       }
-      if (responseModel.result == ResultEnum.success) {
-        return responseModel;
-      }
+      // if (responseModel.statusCode == ResultEnum.success) {
+      return responseModel!;
+      // }
       i++;
     }
-    return responseModel;
+    return responseModel!;
   }
 
   @override
-  Future<ResponseModel> httpGet(
+  Future<Response> httpGet(
       String url,
       List<QueryModel>? query,
       String? pathVariable,
       HeaderEnum headerEnum,
       ResponseEnum responseEnum) async {
     int i = 0;
-    ResponseModel responseModel = ResponseModel();
+    Response? responseModel;
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
@@ -134,41 +137,43 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(
-            ResponseModel(
-                data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
-                message: e.toString()),
-            url);
+        throw Exception(e.toString());
 
-        NetworkInfoImpl networkInfo = NetworkInfoImpl();
-        await networkInfo.isConnected.then((value) {
-          if (value) {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: (e).response?.statusCode ?? 510,
-                data: e.error,
-                message: e.response?.data ?? "");
-          } else {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: 555,
-                data: null,
-                message: "No Internet Connection");
-          }
-        });
+        // ApiFailure(
+        //     ResponseModel(
+        //         data: (e as DioError).response?.data,
+        //         statusCode: (e).response?.statusCode ?? 555,
+        //         result: ResultEnum.error,
+        //         message: e.toString()),
+        //     url);
+
+        // NetworkInfoImpl networkInfo = NetworkInfoImpl();
+        // await networkInfo.isConnected.then((value) {
+        //   if (value) {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: (e).response?.statusCode ?? 510,
+        //         data: e.error,
+        //         message: e.response?.data ?? "");
+        //   } else {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: 555,
+        //         data: null,
+        //         message: "No Internet Connection");
+        //   }
+        // });
       }
-      if (responseModel.result == ResultEnum.success) {
-        return responseModel;
-      }
+      // if (responseModel.result == ResultEnum.success) {
+      return responseModel!;
+      // }
       i++;
     }
-    return responseModel;
+    return responseModel!;
   }
 
   @override
-  Future<ResponseModel> httpPost(
+  Future<Response> httpPost(
       String url,
       List<QueryModel>? query,
       String? pathVariable,
@@ -176,7 +181,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       HeaderEnum headerEnum,
       ResponseEnum responseEnum) async {
     int i = 0;
-    ResponseModel responseModel = ResponseModel();
+    Response? responseModel;
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
@@ -189,40 +194,42 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(
-            ResponseModel(
-                data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
-                message: e.toString()),
-            url);
-        NetworkInfoImpl networkInfo = NetworkInfoImpl();
-        await networkInfo.isConnected.then((value) {
-          if (value) {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: (e).response?.statusCode ?? 510,
-                data: e.error,
-                message: e.response?.data ?? "");
-          } else {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: 555,
-                data: null,
-                message: "No Internet Connection");
-          }
-        });
+        throw Exception(e.toString());
+
+        // ApiFailure(
+        //     ResponseModel(
+        //         data: (e as DioError).response?.data,
+        //         statusCode: (e).response?.statusCode ?? 555,
+        //         result: ResultEnum.error,
+        //         message: e.toString()),
+        //     url);
+        // NetworkInfoImpl networkInfo = NetworkInfoImpl();
+        // await networkInfo.isConnected.then((value) {
+        //   if (value) {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: (e).response?.statusCode ?? 510,
+        //         data: e.error,
+        //         message: e.response?.data ?? "");
+        //   } else {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: 555,
+        //         data: null,
+        //         message: "No Internet Connection");
+        //   }
+        // });
       }
-      if (responseModel.result == ResultEnum.success) {
-        return responseModel;
-      }
+      // if (responseModel.result == ResultEnum.success) {
+      return responseModel!;
+      // }
       i++;
     }
-    return responseModel;
+    return responseModel!;
   }
 
   @override
-  Future<ResponseModel> httpPut(
+  Future<Response> httpPut(
       String url,
       List<QueryModel>? query,
       String? pathVariable,
@@ -230,7 +237,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       HeaderEnum headerEnum,
       ResponseEnum responseEnum) async {
     int i = 0;
-    ResponseModel responseModel = ResponseModel();
+    Response? responseModel;
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
@@ -243,41 +250,42 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(
-            ResponseModel(
-                data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
-                message: e.toString()),
-            url);
-
-        NetworkInfoImpl networkInfo = NetworkInfoImpl();
-        await networkInfo.isConnected.then((value) {
-          if (value) {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: (e).response?.statusCode ?? 510,
-                data: e.error,
-                message: e.response?.data ?? "");
-          } else {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: 555,
-                data: null,
-                message: "No Internet Connection");
-          }
-        });
+        throw Exception(e.toString());
+        // ApiFailure(
+        //     ResponseModel(
+        //         data: (e as DioError).response?.data,
+        //         statusCode: (e).response?.statusCode ?? 555,
+        //         result: ResultEnum.error,
+        //         message: e.toString()),
+        //     url);
+        //
+        // NetworkInfoImpl networkInfo = NetworkInfoImpl();
+        // await networkInfo.isConnected.then((value) {
+        //   if (value) {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: (e).response?.statusCode ?? 510,
+        //         data: e.error,
+        //         message: e.response?.data ?? "");
+        //   } else {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: 555,
+        //         data: null,
+        //         message: "No Internet Connection");
+        //   }
+        // });
       }
-      if (responseModel.result == ResultEnum.success) {
-        return responseModel;
-      }
+      // if (responseModel.result == ResultEnum.success) {
+      return responseModel!;
+      // }
       i++;
     }
-    return responseModel;
+    return responseModel!;
   }
 
   @override
-  Future<ResponseModel> httpPatch(
+  Future<Response> httpPatch(
       String url,
       List<QueryModel>? query,
       String? pathVariable,
@@ -285,7 +293,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       HeaderEnum headerEnum,
       ResponseEnum responseEnum) async {
     int i = 0;
-    ResponseModel responseModel = ResponseModel();
+    Response? responseModel;
     while (i < ApiRemoteDataSource._tries) {
       try {
         var response = await Dio()
@@ -299,36 +307,37 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
-        ApiFailure(
-            ResponseModel(
-                data: (e as DioError).response?.data,
-                statusCode: (e).response?.statusCode ?? 555,
-                result: ResultEnum.error,
-                message: e.toString()),
-            url);
-
-        NetworkInfoImpl networkInfo = NetworkInfoImpl();
-        await networkInfo.isConnected.then((value) {
-          if (value) {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: (e).response?.statusCode ?? 510,
-                data: e.error,
-                message: e.response?.data ?? "");
-          } else {
-            responseModel = ResponseModel(
-                result: ResultEnum.error,
-                statusCode: 555,
-                data: null,
-                message: "No Internet Connection");
-          }
-        });
+        throw Exception(e.toString());
+        // ApiFailure(
+        //     ResponseModel(
+        //         data: (e as DioError).response?.data,
+        //         statusCode: (e).response?.statusCode ?? 555,
+        //         result: ResultEnum.error,
+        //         message: e.toString()),
+        //     url);
+        //
+        // NetworkInfoImpl networkInfo = NetworkInfoImpl();
+        // await networkInfo.isConnected.then((value) {
+        //   if (value) {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: (e).response?.statusCode ?? 510,
+        //         data: e.error,
+        //         message: e.response?.data ?? "");
+        //   } else {
+        //     responseModel = ResponseModel(
+        //         result: ResultEnum.error,
+        //         statusCode: 555,
+        //         data: null,
+        //         message: "No Internet Connection");
+        //   }
+        // });
       }
-      if (responseModel.result == ResultEnum.success) {
-        return responseModel;
-      }
+      // if (responseModel.result == ResultEnum.success) {
+        return responseModel!;
+      // }
       i++;
     }
-    return responseModel;
+    return responseModel!;
   }
 }
