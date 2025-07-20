@@ -38,28 +38,17 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
   }
 
   @override
-  String generateQuery(List<QueryModel> queries) {
-    String query = "";
-    if (queries.isNotEmpty) {
-      query += "?";
-      for (var element in queries) {
-        if (element.value != "null") {
-          String? nm = element.name;
-          String? vl = element.value;
-
-          query += "$nm=$vl&";
-        }
-      }
-    }
-
-    return query;
+  String generateQuery(List<QueryModel> params) {
+    return params.map((q) => '${q.name}=${q.value}').join('&');
   }
 
   @override
   String urlGenerator(
       String url, List<QueryModel>? query, String? pathVariable) {
     if (pathVariable != null) url += "/$pathVariable";
-    if (query != null) url += generateQuery(query);
+    if (query != null && query.isNotEmpty) {
+      url += '?${generateQuery(query)}';
+    }
 
     return url;
   }
@@ -75,21 +64,21 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
         case ResponseEnum.responseModelEnum:
           // String data = utf8.decode(response.data.bodyBytes);
           // ResponseModel result = ResponseModel().fromJson(
-            // json.decode(response.data),
-            // response.data,
+          // json.decode(response.data),
+          // response.data,
           // );
-        return response;
-          // if (result.statusCode != 200 && response.statusCode != 201) {
-          //   ApiFailure(
-          //       ResponseModel(
-          //         statusCode: response.statusCode,
-          //         result: ResultEnum.error,
-          //         data: result.data,
-          //         message: result.message,
-          //       ),
-          //       response.realUri.path);
-          // }
-          // return result;
+          return response;
+        // if (result.statusCode != 200 && response.statusCode != 201) {
+        //   ApiFailure(
+        //       ResponseModel(
+        //         statusCode: response.statusCode,
+        //         result: ResultEnum.error,
+        //         data: result.data,
+        //         message: result.message,
+        //       ),
+        //       response.realUri.path);
+        // }
+        // return result;
         default:
           return response.data.bodyBytes;
       }
