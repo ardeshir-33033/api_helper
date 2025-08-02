@@ -144,6 +144,12 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
+        if (e is DioException) {
+          if (e.response != null) {
+            return ApiHelperMethodsImpl()
+                .responseGetter(responseEnum, e.response!);
+          }
+        }
         throw Exception(e.toString());
 
         // ApiFailure(
@@ -201,6 +207,12 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
+        if (e is DioException) {
+          if (e.response != null) {
+            return ApiHelperMethodsImpl()
+                .responseGetter(responseEnum, e.response!);
+          }
+        }
         throw Exception(e.toString());
 
         // ApiFailure(
@@ -257,6 +269,12 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
+        if (e is DioException) {
+          if (e.response != null) {
+            return ApiHelperMethodsImpl()
+                .responseGetter(responseEnum, e.response!);
+          }
+        }
         throw Exception(e.toString());
         // ApiFailure(
         //     ResponseModel(
@@ -314,6 +332,12 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
+        if (e is DioException) {
+          if (e.response != null) {
+            return ApiHelperMethodsImpl()
+                .responseGetter(responseEnum, e.response!);
+          }
+        }
         throw Exception(e.toString());
         // ApiFailure(
         //     ResponseModel(
