@@ -7,6 +7,7 @@ import 'package:dio/dio.dart';
 import '../../../../core/network/network_info.dart';
 import '../enums/response_enum.dart';
 import '../models/query_model.dart';
+import 'package:dio/dio.dart';
 
 abstract class ApiRemoteDataSource {
   static int _tries = 1;
@@ -82,6 +83,12 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         responseModel =
             ApiHelperMethodsImpl().responseGetter(responseEnum, response);
       } catch (e) {
+        if (e is DioException) {
+          if (e.response != null) {
+            return ApiHelperMethodsImpl()
+                .responseGetter(responseEnum, e.response!);
+          }
+        }
         throw Exception(e.toString());
 // responseModel = Response(requestOptions: requestOptions);
 //         ApiFailure(
@@ -334,7 +341,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         // });
       }
       // if (responseModel.result == ResultEnum.success) {
-        return responseModel!;
+      return responseModel!;
       // }
       i++;
     }
