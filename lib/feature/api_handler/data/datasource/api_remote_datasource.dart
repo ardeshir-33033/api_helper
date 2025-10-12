@@ -11,7 +11,7 @@ import 'package:dio/dio.dart';
 
 abstract class ApiRemoteDataSource {
   static int _tries = 1;
-  static int _timeout = 20;
+  static int _timeout = 40;
 
   Future<Response> httpGet(
     String url,
