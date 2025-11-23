@@ -52,6 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
     api.onTokenExpired(() {
       print('TOKEN EXPIRED!');
     });
+    api.setNoInternetMessage('Please check your internet connection.');
   }
 
   @override

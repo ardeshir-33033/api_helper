@@ -1,5 +1,6 @@
 import 'package:api_handler/core/consts/language.dart';
 import 'package:api_handler/core/consts/user_agent.dart';
+import 'package:api_handler/core/network/network_info.dart';
 import 'package:api_handler/feature/api_handler/domain/usecases/get_api_usecase.dart';
 import 'package:api_handler/feature/api_handler/domain/usecases/patch_api_usecase.dart';
 import 'package:dio/dio.dart';
@@ -44,6 +45,11 @@ class APIHandler {
     Language language = Language();
 
     language.setLanguage = lang;
+  }
+
+  /// sets the message used when the device is offline.
+  setNoInternetMessage(String message) {
+    NetworkInfoImpl.noInternetMessage = message;
   }
 
   /// get Token if exists

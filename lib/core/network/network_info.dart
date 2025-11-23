@@ -5,6 +5,17 @@ abstract class NetworkInfo {
 }
 
 class NetworkInfoImpl implements NetworkInfo {
+  static const String _defaultNoInternetMessage = 'Internet is not connected';
+  static String _noInternetMessage = _defaultNoInternetMessage;
+
+  /// Allows consumers to override the message thrown when no connection is available.
+  static set noInternetMessage(String message) {
+    _noInternetMessage =
+        (message.isNotEmpty) ? message : _defaultNoInternetMessage;
+  }
+
+  static String get noInternetMessage => _noInternetMessage;
+
   @override
   Future<bool> get isConnected => _checkStatus();
 
