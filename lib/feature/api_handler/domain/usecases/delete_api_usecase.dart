@@ -18,6 +18,7 @@ class DeleteApi implements UseCase<DeleteApiData> {
       apiData.body,
       apiData.headerEnum,
       apiData.responseEnum,
+      timeoutSeconds: apiData.timeout,
     );
 
     return response;

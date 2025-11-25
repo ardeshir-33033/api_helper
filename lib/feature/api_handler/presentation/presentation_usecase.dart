@@ -60,6 +60,7 @@ class APIHandler {
     String url, {
     List<QueryModel>? queries,
     String? pathVariable,
+    int? timeoutSeconds,
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
@@ -67,6 +68,7 @@ class APIHandler {
       url,
       queries: queries,
       pathVars: pathVariable,
+      timeout: timeoutSeconds,
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
@@ -82,6 +84,7 @@ class APIHandler {
     List<QueryModel>? queries,
     String? pathVariable,
     dynamic body,
+    int? timeoutSeconds,
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
@@ -90,6 +93,7 @@ class APIHandler {
       queries: queries,
       pathVars: pathVariable,
       body: body,
+      timeout: timeoutSeconds,
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
@@ -105,6 +109,7 @@ class APIHandler {
     List<QueryModel>? queries,
     String? pathVariable,
     dynamic body,
+    int? timeoutSeconds,
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
@@ -113,6 +118,7 @@ class APIHandler {
       queries: queries,
       pathVars: pathVariable,
       body: body,
+      timeout: timeoutSeconds,
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
@@ -128,6 +134,7 @@ class APIHandler {
     List<QueryModel>? queries,
     String? pathVariable,
     dynamic body,
+    int? timeoutSeconds,
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
@@ -136,6 +143,7 @@ class APIHandler {
       queries: queries,
       pathVars: pathVariable,
       body: body,
+      timeout: timeoutSeconds,
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));
@@ -151,6 +159,7 @@ class APIHandler {
     List<QueryModel>? queries,
     String? pathVariable,
     dynamic body,
+    int? timeoutSeconds,
     required HeaderEnum headerEnum,
     required ResponseEnum responseEnum,
   }) async {
@@ -159,6 +168,7 @@ class APIHandler {
       queries: queries,
       pathVars: pathVariable,
       body: body,
+      timeout: timeoutSeconds,
       headerEnum: headerEnum,
       responseEnum: responseEnum,
     ));

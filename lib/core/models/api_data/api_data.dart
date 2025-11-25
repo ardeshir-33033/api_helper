@@ -8,11 +8,13 @@ abstract class ApiData {
   ResponseEnum responseEnum;
   List<QueryModel>? queries;
   String? pathVars;
+  int? timeout;
 
   ApiData(
     this.url, {
     this.queries,
     this.pathVars = '',
+    this.timeout,
     required this.headerEnum,
     required this.responseEnum,
   });
@@ -34,12 +36,16 @@ class GetApiData implements ApiData {
   @override
   var responseEnum;
 
+  @override
+  int? timeout;
+
   GetApiData(
     this.url, {
     this.queries,
     required this.headerEnum,
     this.pathVars,
     required this.responseEnum,
+    this.timeout,
   });
 }
 
@@ -61,6 +67,9 @@ class PostApiData implements ApiData {
 
   dynamic body;
 
+  @override
+  int? timeout;
+
   PostApiData(
     this.url, {
     this.body,
@@ -68,6 +77,7 @@ class PostApiData implements ApiData {
     this.pathVars,
     this.queries,
     required this.responseEnum,
+    this.timeout,
   });
 }
 
@@ -89,6 +99,9 @@ class PutApiData implements ApiData {
 
   dynamic body;
 
+  @override
+  int? timeout;
+
   PutApiData(
     this.url, {
     this.body,
@@ -96,6 +109,7 @@ class PutApiData implements ApiData {
     this.pathVars,
     this.queries,
     required this.responseEnum,
+    this.timeout,
   });
 }
 
@@ -117,6 +131,9 @@ class PatchApiData implements ApiData {
 
   dynamic body;
 
+  @override
+  int? timeout;
+
   PatchApiData(
     this.url, {
     this.body,
@@ -124,6 +141,7 @@ class PatchApiData implements ApiData {
     this.pathVars,
     this.queries,
     required this.responseEnum,
+    this.timeout,
   });
 }
 
@@ -145,6 +163,9 @@ class DeleteApiData implements ApiData {
 
   dynamic body;
 
+  @override
+  int? timeout;
+
   DeleteApiData(
     this.url, {
     this.body,
@@ -152,5 +173,6 @@ class DeleteApiData implements ApiData {
     this.pathVars,
     this.queries,
     required this.responseEnum,
+    this.timeout,
   });
 }

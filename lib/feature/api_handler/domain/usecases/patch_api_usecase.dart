@@ -18,6 +18,7 @@ class PatchApi implements UseCase<PatchApiData> {
       apiData.body,
       apiData.headerEnum,
       apiData.responseEnum,
+      timeoutSeconds: apiData.timeout,
     );
 
     return response;

@@ -19,6 +19,7 @@ class GetApi implements UseCase<GetApiData> {
       apiData.pathVars,
       apiData.headerEnum,
       apiData.responseEnum,
+      timeoutSeconds: apiData.timeout,
     );
 
     return response;

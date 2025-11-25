@@ -20,6 +20,7 @@ class PutApi implements UseCase<PutApiData> {
       apiData.body,
       apiData.headerEnum,
       apiData.responseEnum,
+      timeoutSeconds: apiData.timeout,
     );
 
     return response;

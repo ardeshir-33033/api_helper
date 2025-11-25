@@ -20,6 +20,7 @@ class PostApi implements UseCase<PostApiData> {
       apiData.body,
       apiData.headerEnum,
       apiData.responseEnum,
+      timeoutSeconds: apiData.timeout,
     );
 
     return response;

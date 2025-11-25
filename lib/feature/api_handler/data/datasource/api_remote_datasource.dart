@@ -16,6 +16,7 @@ abstract class ApiRemoteDataSource {
     String? pathVariable,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
+    {int? timeoutSeconds}
   );
 
   Future<Response> httpPost(
@@ -25,6 +26,7 @@ abstract class ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
+    {int? timeoutSeconds}
   );
 
   Future<Response> httpPut(
@@ -34,6 +36,7 @@ abstract class ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
+    {int? timeoutSeconds}
   );
 
   Future<Response> httpPatch(
@@ -43,6 +46,7 @@ abstract class ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
+    {int? timeoutSeconds}
   );
 
   Future<Response> httpDelete(
@@ -52,6 +56,7 @@ abstract class ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
+    {int? timeoutSeconds}
   );
 }
 
@@ -72,15 +77,17 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
   Future<Response> _performRequest(
     Future<Response> Function() request,
     ResponseEnum responseEnum,
+    {int? timeoutSeconds}
   ) async {
     int i = 0;
     Response? responseModel;
+    final timeout = timeoutSeconds ?? ApiRemoteDataSource._timeout;
 
     while (i < ApiRemoteDataSource._tries) {
       try {
         await _ensureConnection();
         final response = await request()
-            .timeout(Duration(seconds: ApiRemoteDataSource._timeout));
+            .timeout(Duration(seconds: timeout));
         responseModel = _helperMethods.responseGetter(responseEnum, response);
       } on DioException catch (e) {
         if (e.response != null) {
@@ -106,7 +113,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
-  ) {
+    {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().delete(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -116,6 +123,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         ),
       ),
       responseEnum,
+      timeoutSeconds: timeoutSeconds,
     );
   }
 
@@ -126,7 +134,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     String? pathVariable,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
-  ) {
+    {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().get(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -135,6 +143,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         ),
       ),
       responseEnum,
+      timeoutSeconds: timeoutSeconds,
     );
   }
 
@@ -146,7 +155,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
-  ) {
+    {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().post(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -156,6 +165,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         ),
       ),
       responseEnum,
+      timeoutSeconds: timeoutSeconds,
     );
   }
 
@@ -167,7 +177,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
-  ) {
+    {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().put(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -177,6 +187,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         ),
       ),
       responseEnum,
+      timeoutSeconds: timeoutSeconds,
     );
   }
 
@@ -188,7 +199,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     dynamic body,
     HeaderEnum headerEnum,
     ResponseEnum responseEnum,
-  ) {
+    {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().patch(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -198,6 +209,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
         ),
       ),
       responseEnum,
+      timeoutSeconds: timeoutSeconds,
     );
   }
 }
