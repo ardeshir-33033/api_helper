@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:api_handler/feature/api_handler/data/enums/result_enums.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 
 import '../../feature/api_handler/data/enums/header_enum.dart';
 import '../../feature/api_handler/data/enums/response_enum.dart';
@@ -53,7 +54,7 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
     return url;
   }
 
-  responseGetter<T>(ResponseEnum typeEnum, Response response) {
+  Response responseGetter(ResponseEnum typeEnum, Response response) {
     if (response.statusCode != 200 && response.statusCode != 201) {
       return response;
       // ApiFailure(ResponseModel(statusCode: response.statusCode ?? 555),
@@ -67,6 +68,19 @@ class ApiHelperMethodsImpl implements ApiHelperMethods {
           // json.decode(response.data),
           // response.data,
           // );
+          return response;
+        case ResponseEnum.unit8ListEnum:
+          final data = response.data;
+          if (data is Uint8List) return response;
+          if (data is List<int>) {
+            response.data = Uint8List.fromList(data);
+            return response;
+          }
+          if (data is List) {
+            response.data = Uint8List.fromList(data.cast<int>());
+            return response;
+          }
+          response.data = Uint8List(0);
           return response;
         // if (result.statusCode != 200 && response.statusCode != 201) {
         //   ApiFailure(

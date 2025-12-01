@@ -67,6 +67,15 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
   final NetworkInfo _networkInfo;
   final ApiHelperMethodsImpl _helperMethods = ApiHelperMethodsImpl();
 
+  Options _buildOptions(HeaderEnum headerEnum, ResponseEnum responseEnum) {
+    return Options(
+      headers: _helperMethods.headerGetter(headerEnum),
+      responseType: responseEnum == ResponseEnum.unit8ListEnum
+          ? ResponseType.bytes
+          : ResponseType.json,
+    );
+  }
+
   Future<void> _ensureConnection() async {
     final connected = await _networkInfo.isConnected;
     if (!connected) {
@@ -118,9 +127,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       () => Dio().delete(
         _helperMethods.urlGenerator(url, query, pathVariable),
         data: body,
-        options: Options(
-          headers: _helperMethods.headerGetter(headerEnum),
-        ),
+        options: _buildOptions(headerEnum, responseEnum),
       ),
       responseEnum,
       timeoutSeconds: timeoutSeconds,
@@ -138,9 +145,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     return _performRequest(
       () => Dio().get(
         _helperMethods.urlGenerator(url, query, pathVariable),
-        options: Options(
-          headers: _helperMethods.headerGetter(headerEnum),
-        ),
+        options: _buildOptions(headerEnum, responseEnum),
       ),
       responseEnum,
       timeoutSeconds: timeoutSeconds,
@@ -160,9 +165,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       () => Dio().post(
         _helperMethods.urlGenerator(url, query, pathVariable),
         data: body,
-        options: Options(
-          headers: _helperMethods.headerGetter(headerEnum),
-        ),
+        options: _buildOptions(headerEnum, responseEnum),
       ),
       responseEnum,
       timeoutSeconds: timeoutSeconds,
@@ -182,9 +185,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       () => Dio().put(
         _helperMethods.urlGenerator(url, query, pathVariable),
         data: body,
-        options: Options(
-          headers: _helperMethods.headerGetter(headerEnum),
-        ),
+        options: _buildOptions(headerEnum, responseEnum),
       ),
       responseEnum,
       timeoutSeconds: timeoutSeconds,
@@ -204,9 +205,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
       () => Dio().patch(
         _helperMethods.urlGenerator(url, query, pathVariable),
         data: body,
-        options: Options(
-          headers: _helperMethods.headerGetter(headerEnum),
-        ),
+        options: _buildOptions(headerEnum, responseEnum),
       ),
       responseEnum,
       timeoutSeconds: timeoutSeconds,
