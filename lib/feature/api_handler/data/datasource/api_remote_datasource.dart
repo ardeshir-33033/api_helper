@@ -10,54 +10,45 @@ abstract class ApiRemoteDataSource {
   static int _tries = 1;
   static int _timeout = 40;
 
-  Future<Response> httpGet(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}
-  );
+  Future<Response> httpGet(String url, List<QueryModel>? query,
+      String? pathVariable, HeaderEnum headerEnum, ResponseEnum responseEnum,
+      {int? timeoutSeconds});
 
   Future<Response> httpPost(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}
-  );
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds});
 
   Future<Response> httpPut(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}
-  );
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds});
 
   Future<Response> httpPatch(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}
-  );
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds});
 
   Future<Response> httpDelete(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}
-  );
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds});
 }
 
 class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
@@ -79,15 +70,17 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
   Future<void> _ensureConnection() async {
     final connected = await _networkInfo.isConnected;
     if (!connected) {
-      throw Exception(NetworkInfoImpl.noInternetMessage);
+      throw DioException(
+          response: Response(
+              data: NetworkInfoImpl.noInternetMessage,
+              requestOptions: RequestOptions()),
+          requestOptions: RequestOptions());
     }
   }
 
   Future<Response> _performRequest(
-    Future<Response> Function() request,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}
-  ) async {
+      Future<Response> Function() request, ResponseEnum responseEnum,
+      {int? timeoutSeconds}) async {
     int i = 0;
     Response? responseModel;
     final timeout = timeoutSeconds ?? ApiRemoteDataSource._timeout;
@@ -95,8 +88,7 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
     while (i < ApiRemoteDataSource._tries) {
       try {
         await _ensureConnection();
-        final response = await request()
-            .timeout(Duration(seconds: timeout));
+        final response = await request().timeout(Duration(seconds: timeout));
         responseModel = _helperMethods.responseGetter(responseEnum, response);
       } on DioException catch (e) {
         if (e.response != null) {
@@ -116,13 +108,13 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
 
   @override
   Future<Response> httpDelete(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}) {
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().delete(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -135,13 +127,9 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
   }
 
   @override
-  Future<Response> httpGet(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}) {
+  Future<Response> httpGet(String url, List<QueryModel>? query,
+      String? pathVariable, HeaderEnum headerEnum, ResponseEnum responseEnum,
+      {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().get(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -154,13 +142,13 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
 
   @override
   Future<Response> httpPost(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}) {
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().post(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -174,13 +162,13 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
 
   @override
   Future<Response> httpPut(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}) {
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().put(
         _helperMethods.urlGenerator(url, query, pathVariable),
@@ -194,13 +182,13 @@ class ApiRemoteDataSourceImpl extends ApiRemoteDataSource {
 
   @override
   Future<Response> httpPatch(
-    String url,
-    List<QueryModel>? query,
-    String? pathVariable,
-    dynamic body,
-    HeaderEnum headerEnum,
-    ResponseEnum responseEnum,
-    {int? timeoutSeconds}) {
+      String url,
+      List<QueryModel>? query,
+      String? pathVariable,
+      dynamic body,
+      HeaderEnum headerEnum,
+      ResponseEnum responseEnum,
+      {int? timeoutSeconds}) {
     return _performRequest(
       () => Dio().patch(
         _helperMethods.urlGenerator(url, query, pathVariable),
